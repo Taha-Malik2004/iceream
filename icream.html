@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class IceCream {
+            constructor(flavor, price, quantity) {
+                this.flavor = flavor;
+                this.price = price;
+                this.quantity = quantity;
+            }
+        }
+        class Inventory {
+            constructor() {
+                this.iceCreams = [];
+            }
+            addIceCream(flavor, price, quantity) {
+                const iceCream = new IceCream(flavor, price, quantity);
+                this.iceCreams.push(iceCream);
+            }
+            updateIceCream(flavor, newFlavor, newPrice, newQuantity) {
+                const iceCream = this.iceCreams.find(ic => ic.flavor === flavor);
+                if (iceCream) {
+                    iceCream.flavor = newFlavor;
+                    iceCream.price = newPrice;
+                    iceCream.quantity = newQuantity;
+                } else {
+                    console.log('Ice cream not found!');
+                }
+            }
+            calculateTotalValue() {
+                return this.iceCreams.reduce((total, ic) => total + (ic.price * ic.quantity), 0);
+            }
+            listIceCreams() {
+                return this.iceCreams;
+            }
+        }
+
+        const inventory = new Inventory();
+
+        inventory.addIceCream('Vanilla', 3, 10);
+        inventory.addIceCream('Chocolate', 4, 5);
+        inventory.addIceCream('Strawberry', 3.5, 8);
+
+        console.log('Total value of inventory:', inventory.calculateTotalValue()); // Output: 49
+
+        inventory.updateIceCream('Vanilla', 'Vanilla', 3.2, 12);
+        console.log('Total value after update:', inventory.calculateTotalValue()); // Output: 50.4
+
+        console.log('Current inventory:', inventory.listIceCreams());
+
+    </script>
+</body>
+</html>
+
+       
